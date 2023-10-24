@@ -1,3 +1,4 @@
+from ast import main
 from io import BytesIO
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -157,6 +158,11 @@ def checkTshirt(check_cat):
     return False
 
 
+def checkForTshirt(check_cate):
+    if 'bra' in check_cate:
+        return True
+    return False
+
 def getAmazonData(brand, color, style, category):
 
     amazon_output_data = []
@@ -168,7 +174,6 @@ def getAmazonData(brand, color, style, category):
     options.add_argument('--log-level=3')
     options.add_argument(f'user-agent={user_agent}')
     options.add_argument("--window-size=1920,1080")
-    options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
     options.add_argument("--disable-extensions")
     options.add_argument("--proxy-server='direct://'")
@@ -179,9 +184,9 @@ def getAmazonData(brand, color, style, category):
     options.add_argument('--no-sandbox')
     options.add_argument('ignore-certificate-errors')
     # chrome_options.add_argument('window-size=1920x1080')
-    driver = webdriver.Chrome(service=Service(
-        'chromedriver.exe'), options=options)
-
+    
+    driver = webdriver.Chrome(executable_path='./chromedriver',options=options)
+    
     if (category == 'Shirt'):
         category = 'Shirts'
 
@@ -241,8 +246,10 @@ def getAmazonData(brand, color, style, category):
 
                     if (category == 'shirt' and checkTshirt(check_cate)):
                         continue
-                    # if(category == 'shirt' and ('t-' or 't') in check_cate):
-                    #     print('+++++++++++++++++++---------------------------',category,temp,check_cate,ProdLink)
+
+                    if(category == 't-shirt' and  checkForTshirt(check_cate)):
+                        continue
+
                     # print('***************check category******')
                     # print(category,temp,check_cate,ProdLink)
 
@@ -265,7 +272,6 @@ def getAmazonData(brand, color, style, category):
         return amazon_output_data
     except Exception as e:
         return f'Something went Wrong'
-
 
 def getMyntraData(brand, color, style, category):
 
@@ -518,7 +524,7 @@ def getAjioData(brand, color, style, category):
             ajio_output_data, key=functools.cmp_to_key(compare))
 
         ajio_output_data = ajio_output_data[:4]
-
+        driver.quit()
         if (len(ajio_output_data) == 0):
             return 'No Data Found'
         return ajio_output_data
