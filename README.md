@@ -1,4 +1,4 @@
-# ValueHunt Frontend
+# ValueHunt Backend
 
 Welcome to ValueHunt, an innovative website that utilizes the power of artificial intelligence to 
 help you find the best deals on clothes online. Our unique platform allows users to simply upload 
@@ -6,8 +6,6 @@ a photo of the clothing item they are interested in, and our AI model extracts k
 the category, color and style. We then use this information to search across top e-commerce platforms like 
 Amazon, Flipkart, Ajio, and Myntra to provide you with the lowest possible price for that particular 
 clothing item.
-
-## Important -> The site backend has been shut down as it is deployed in Azure and Currently I am out of Credits. Till then You can see The Screenshots
 
 ## About
 
@@ -39,5 +37,5 @@ We have used the following technologies:
 - Scraping: Selenium
 - Machine Learning: Transfer Learning and Convolutional Neural Networks (CNN) trained using VGG.
 
-## [ Frontend Code ] (https://github.com/Abhishekkumar021/valueHunt-Frontend)
 ## [ Backend Code ] (https://github.com/Abhishekkumar021/valuehunt-Backend)
+## [ Frontend Code ] (https://github.com/Abhishekkumar021/valueHunt-Frontend)
